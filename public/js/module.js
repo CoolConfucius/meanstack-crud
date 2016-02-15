@@ -11,6 +11,46 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/'); 
 });
 
+app.service('Todo', function($http) {
+  
+  this.todos = function() {
+    return $http.get('/todos').then(res => {
+      this.data = res.data; 
+    }); 
+  }; 
+
+  this.add = function(todo) {
+    return $http.post('/todos', todo)
+  };
+})
+
+app.controller('homeCtrl', function($scope, $state, Todo){
+  console.log("homeCtrl ctrl");
+  $scope.sort = function(key){
+    console.log("sort!");
+    if ($scope.sorttext === key) {
+      $scope.sorttext = '-'+key;   
+    } else {
+      $scope.sorttext = key; 
+    }
+  };
+
+  $scope.addTodo = function(todo){
+    var newObj; 
+    if (todo) {
+      var description = todo.description ? todo.description : 'default description';
+      newObj = {
+        description: description, 
+        date: Date.now(), 
+        iscomplete: false
+      }
+    } 
+    $scope.todos.push(newObj); 
+  }
+
+
+})
+
 
 app.directive('myTable', function() {
   return {
@@ -20,7 +60,7 @@ app.directive('myTable', function() {
       sorttext: '='
     },
     controller: 'myTableCtrl', 
-    templateUrl: '/html/templates/myTable.html'
+    templateUrl: '/html/myTable.html'
   };
 });
 
