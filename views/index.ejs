@@ -21,6 +21,7 @@
       <button class="btn btn-success btn-lg" ng-click="addTodo(todo)">Add Todo</button>
     
       <!-- {{todos}} -->
+      <hr>
       <table>
         <thead>
           <tr>            
@@ -37,7 +38,8 @@
             
             <td>{{$index}}</td>
             <td>{{item.description}}</td>
-            <td>{{item.date}}</td>
+            <td ng-if="item.long">{{item.long}}</td>
+            <td ng-if="!item.long">{{item.date}}</td>
             <td ng-click="toggle(item, $index)">
               <div class="btn btn-primary btn-sm">                
                 {{item.iscomplete}}</td>

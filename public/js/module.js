@@ -81,6 +81,7 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
       // $scope.sort('date'); 
       $scope.todos.push(newObj); 
     }  
+    $scope.todo.description = " "; 
     Todo.add(newObj); 
   };
 
