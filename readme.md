@@ -5,8 +5,5 @@ Enter the description and due date of a task into the input. Hit the Add Todo bu
 
 ### Deployed at: https://feb152016.herokuapp.com/
 
-
-To begin execute `serve`.  
-
 To begin enter `npm run setup`.  This will install all dependencies.
 After that, you can start your server with `npm start` or `nodemon`.
