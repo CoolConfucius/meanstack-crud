@@ -83,6 +83,7 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
         date: Date.now(), 
         iscomplete: false
       }
+      // $scope.sort('date'); 
       $scope.todos.push(newObj); 
     }  
     Todo.add(newObj); 
@@ -92,6 +93,7 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     console.log("todoid", todo);
     console.log("todoid", todo._id);
     console.log("index", index);
+    // $scope.sort('date'); 
     $scope.todos[index].iscomplete = !$scope.todos[index].iscomplete;
     Todo.toggle(todo._id.toString()); 
   }
@@ -100,33 +102,33 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
 })
 
 
-app.directive('myTable', function() {
-  return {
-    restrict: 'AE',
-    scope: {
-      list: '=',
-      sorttext: '='
-    },
-    controller: 'myTableCtrl', 
-    templateUrl: '/html/myTable.html'
-  };
-});
+// app.directive('myTable', function() {
+//   return {
+//     restrict: 'AE',
+//     scope: {
+//       list: '=',
+//       sorttext: '='
+//     },
+//     controller: 'myTableCtrl', 
+//     templateUrl: '/html/myTable.html'
+//   };
+// });
 
-app.filter('titlecase', function() {
-  return function(input) {
-    if (typeof input !== 'string') return input;
-    return input[0].toUpperCase() + input.slice(1).toLowerCase(); 
-  };
-}); 
+// app.filter('titlecase', function() {
+//   return function(input) {
+//     if (typeof input !== 'string') return input;
+//     return input[0].toUpperCase() + input.slice(1).toLowerCase(); 
+//   };
+// }); 
 
-app.controller('myTableCtrl', function($scope){
-  console.log("myTable ctrl");
-  $scope.sort = function(key){
-    console.log("sort!");
-    if ($scope.sorttext === key) {
-      $scope.sorttext = '-'+key;   
-    } else {
-      $scope.sorttext = key; 
-    }
-  }
-})
+// app.controller('myTableCtrl', function($scope){
+//   console.log("myTable ctrl");
+//   $scope.sort = function(key){
+//     console.log("sort!");
+//     if ($scope.sorttext === key) {
+//       $scope.sorttext = '-'+key;   
+//     } else {
+//       $scope.sorttext = key; 
+//     }
+//   }
+// })
