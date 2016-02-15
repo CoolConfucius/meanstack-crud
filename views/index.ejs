@@ -18,6 +18,8 @@
       <!-- <my-table data='users'></my-table> -->
       <label for="">Description:</label>
       <input type="text" ng-model="todo.description">
+      <label for="">Due Date:</label>
+      <input type="date" ng-model="todo.due">
       <button class="btn btn-success btn-lg" ng-click="addTodo(todo)">Add Todo</button>
     
       <!-- {{todos}} -->
@@ -26,20 +28,23 @@
         <thead>
           <tr>            
               <th ng-click="sort('date')">#</th>
-              <th ng-click="sort('')">Description</th>
-              <th ng-click="sort('date')">Date</th>
+              <th ng-click="sort('description')">Description</th>
+              <!-- <th ng-click="sort('date')">Date</th> -->
+              <th ng-click="sort('due')">Due Date</th>
               <th ng-click="sort('iscomplete')">Complete?</th>
               <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat='item in todos | orderBy:sorttext track by $index'>
+          <tr ng-repeat='item in todos | orderBy:sorttext track by $index' ng-class='{lightsteelblue: $even}'>
             <!-- <td ng-repeat='value in item '>{{value}}</td> -->
             
             <td>{{$index}}</td>
             <td>{{item.description}}</td>
-            <td ng-if="item.long">{{item.long}}</td>
-            <td ng-if="!item.long">{{item.date}}</td>
+            <!-- <td ng-if="item.long">{{item.long}}</td>
+            <td ng-if="!item.long">{{item.date}}</td> -->
+            <td ng-if="item.duelong">{{item.duelong}}</td>
+            <td ng-if="!item.duelong">{{item.due}}</td>
             <td ng-click="toggle(item, $index)">
               <div class="btn btn-primary btn-sm">                
                 {{item.iscomplete}}</td>

@@ -73,15 +73,26 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     var newObj; 
     if (todo) {
       var description = todo.description ? todo.description : 'default description';
+      // var due = todo.due ? todo.due : '';
       newObj = {
         description: description, 
         date: Date.now(), 
-        iscomplete: false
+        iscomplete: false, 
+        // due: due
+        due: todo.due
       }
       // $scope.sort('date'); 
       $scope.todos.push(newObj); 
+      $scope.todo.description = " "; 
+      // $scope.todo.due = " "; 
+    } else {
+      newObj = {
+        description: "default description", 
+        date: Date.now(), 
+        iscomplete: false
+        // due: "default due"
+      }
     }  
-    $scope.todo.description = " "; 
     Todo.add(newObj); 
   };
 
@@ -90,7 +101,9 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     console.log("todoid", todo._id);
     console.log("index", index);
     // $scope.sort('date'); 
-    $scope.todos[index].iscomplete = !$scope.todos[index].iscomplete;
+    // $scope.todos[index].iscomplete = !$scope.todos[index].iscomplete;
+    var realIndex = $scope.todos.indexOf(todo); 
+    $scope.todos[realIndex].iscomplete = !$scope.todos[realIndex].iscomplete;
     Todo.toggle(todo._id.toString()); 
   }
 
@@ -99,7 +112,9 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     console.log("todoid", todo._id);
     console.log("index", index);
     // $scope.sort('date'); 
-    $scope.todos.splice(index, 1);
+    // $scope.todos.splice(index, 1);
+    var realIndex = $scope.todos.indexOf(todo); 
+    $scope.todos.splice(realIndex, 1);
     Todo.remove(todo._id.toString()); 
   }
 
