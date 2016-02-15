@@ -31,6 +31,11 @@ app.service('Todo', function($http) {
   this.add = function(todo) {
     return $http.post('/todos', todo)
   };
+
+  this.toggle = function(todo) {
+    return $http.put('/todos/todo')
+  };
+
 });
 
 app.run(function(Todo, $rootScope){
@@ -78,10 +83,16 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
         date: Date.now(), 
         iscomplete: false
       }
+      $scope.todos.push(newObj); 
     }  
-    // $scope.todos.push(newObj); 
     Todo.add(newObj); 
   };
+
+  $scope.toggle = function(todo){
+    console.log("todoid", todo);
+    console.log("todoid", todo._id);
+    Todo.toggle(todo); 
+  }
 
 
 })

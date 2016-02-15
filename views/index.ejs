@@ -24,13 +24,22 @@
     <table>
       <thead>
         <tr>
-          <td ng-repeat='(header, value) in todos[0] track by $index'
-              ng-click='sort(header)'>{{header}}</td>
+          <!-- <td ng-repeat='(header, value) in todos[0] track by $index'
+              ng-click='sort(header)'>{{header}}</td> -->
+            <th>#</th>
+            <th>Description</th>
+            <th ng-click="sort('date')">Date</th>
+            <th>Complete?</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat='item in todos | orderBy:sorttext track by $index'>
-          <td ng-repeat='value in item '>{{value}}</td>
+          <!-- <td ng-repeat='value in item '>{{value}}</td> -->
+          
+          <td>{{$index}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.date}}</td>
+          <td ng-click="toggle(item)">{{item.iscomplete}}</td>
         </tr>
       </tbody>
     </table>
