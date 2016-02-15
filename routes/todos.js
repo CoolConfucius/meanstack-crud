@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Todo = require('../models/todo');
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
   console.log("getting todos");
   Todo.find({}, function(err, todos){

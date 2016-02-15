@@ -28,9 +28,6 @@ todoSchema.statics.add = function (todo, cb) {
     due: todo.due,
     duelong: duelong,
     dueshort: dueshort
-    // ,
-    // date: Date.now(), 
-    // iscomplete: false
   }, cb);
 };
 

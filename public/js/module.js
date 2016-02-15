@@ -2,15 +2,6 @@
 
 var app = angular.module("someApp", ["ui.router"]); 
 
-// app.config(function($stateProvider, $urlRouterProvider) {
-
-//   $stateProvider
-//     .state('home', { url: '/', templateUrl: '/html/home.html', controller: 'homeCtrl' })
-//     .state('todos', { url: '/', templateUrl: '/html/todos.html', controller: 'homeCtrl' })
-
-//   $urlRouterProvider.otherwise('/'); 
-// });
-
 app.service('Todo', function($http) {
   
   this.todos = function() {
@@ -73,46 +64,33 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     var newObj; 
     if (todo) {
       var description = todo.description ? todo.description : 'default description';
-      // var due = todo.due ? todo.due : '';
       newObj = {
         description: description, 
         date: Date.now(), 
         iscomplete: false, 
-        // due: due
         due: todo.due
       }
-      // $scope.sort('date'); 
+      
       $scope.todos.push(newObj); 
       $scope.todo.description = " "; 
-      // $scope.todo.due = " "; 
+      
     } else {
       newObj = {
         description: "default description", 
         date: Date.now(), 
         iscomplete: false
-        // due: "default due"
       }
     }  
     Todo.add(newObj); 
   };
 
-  $scope.toggle = function(todo, index){
-    console.log("todoid", todo);
-    console.log("todoid", todo._id);
-    console.log("index", index);
-    // $scope.sort('date'); 
-    // $scope.todos[index].iscomplete = !$scope.todos[index].iscomplete;
+  $scope.toggle = function(todo){
     var realIndex = $scope.todos.indexOf(todo); 
     $scope.todos[realIndex].iscomplete = !$scope.todos[realIndex].iscomplete;
     Todo.toggle(todo._id.toString()); 
   }
 
-  $scope.remove = function(todo, index){
-    console.log("todoid", todo);
-    console.log("todoid", todo._id);
-    console.log("index", index);
-    // $scope.sort('date'); 
-    // $scope.todos.splice(index, 1);
+  $scope.remove = function(todo){
     var realIndex = $scope.todos.indexOf(todo); 
     $scope.todos.splice(realIndex, 1);
     Todo.remove(todo._id.toString()); 
@@ -120,35 +98,3 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
 
 
 })
-
-
-// app.directive('myTable', function() {
-//   return {
-//     restrict: 'AE',
-//     scope: {
-//       list: '=',
-//       sorttext: '='
-//     },
-//     controller: 'myTableCtrl', 
-//     templateUrl: '/html/myTable.html'
-//   };
-// });
-
-// app.filter('titlecase', function() {
-//   return function(input) {
-//     if (typeof input !== 'string') return input;
-//     return input[0].toUpperCase() + input.slice(1).toLowerCase(); 
-//   };
-// }); 
-
-// app.controller('myTableCtrl', function($scope){
-//   console.log("myTable ctrl");
-//   $scope.sort = function(key){
-//     console.log("sort!");
-//     if ($scope.sorttext === key) {
-//       $scope.sorttext = '-'+key;   
-//     } else {
-//       $scope.sorttext = key; 
-//     }
-//   }
-// })
