@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "setup": "rm -rf node_modules public/lib && npm i && bower i",
+    "setup": "rm -rf node_modules public/bower_components && npm i && bower i",
     "start": "node ./bin/www",
     "postinstall": "bower i"
   },
