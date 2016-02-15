@@ -37,10 +37,8 @@ router.delete('/:id', function(req, res, next) {
   Todo.findById(req.params.id, function(err, todo){
     if(err) return res.status(400).send(err); 
     console.log("Found one,", todo);
-    todo.iscomplete = !todo.iscomplete; 
-    todo.save(function(err, savedTodo){
-
-      res.send(err || savedTodo);
+    todo.remove(function(err){
+      res.status(err ? 400 : 200).send(err || todo);
     })
   });
 });

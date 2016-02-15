@@ -36,6 +36,10 @@ app.service('Todo', function($http) {
     return $http.put(`/todos/${todo}`)
   };
 
+  this.remove = function(todo) {
+    return $http.delete(`/todos/${todo}`)
+  };
+
 });
 
 app.run(function(Todo, $rootScope){
@@ -54,15 +58,6 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     console.log("Scope todos", $scope.todos);
     console.log("Scope todos", Todo.data);
   });
-  // $scope.getTodos(); 
-
-  // console.log("homeCtrl ctrl");
-  // // console.log(Todo.todos(), "here?"); 
-  // $rootScope.todos = Todo.data; 
-  // $scope.todos = $rootScope.todos;
-  // // $scope.todos = Todo.data;
-  // console.log("Scope todos", $scope.todos);
-  // console.log("Scope todos", Todo.data);
 
   $scope.sort = function(key){
     console.log("sort!");
@@ -96,6 +91,15 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     // $scope.sort('date'); 
     $scope.todos[index].iscomplete = !$scope.todos[index].iscomplete;
     Todo.toggle(todo._id.toString()); 
+  }
+
+  $scope.remove = function(todo, index){
+    console.log("todoid", todo);
+    console.log("todoid", todo._id);
+    console.log("index", index);
+    // $scope.sort('date'); 
+    $scope.todos.splice(index, 1);
+    Todo.remove(todo._id.toString()); 
   }
 
 
