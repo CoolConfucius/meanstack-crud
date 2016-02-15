@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var Todo; 
 
 var todoSchema = mongoose.Schema({
   description: { type: String}, 
@@ -8,6 +9,14 @@ var todoSchema = mongoose.Schema({
   iscomplete: { type: Boolean }
 });
 
-var Todo = mongoose.model('Todo', todoSchema); 
+todoSchema.statics.add = function (todo, cb) {
+  Todo.create({
+    description: todo.desciption,
+    date: Date.now(), 
+    iscomplete: false
+  }, cb);
+};
+
+Todo = mongoose.model('Todo', todoSchema); 
 
 module.exports = Todo; 

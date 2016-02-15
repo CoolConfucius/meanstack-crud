@@ -26,6 +26,8 @@ app.service('Todo', function($http) {
 
 app.controller('homeCtrl', function($scope, $state, Todo){
   console.log("homeCtrl ctrl");
+  $scope.todos = Todo.data;
+
   $scope.sort = function(key){
     console.log("sort!");
     if ($scope.sorttext === key) {
@@ -46,6 +48,8 @@ app.controller('homeCtrl', function($scope, $state, Todo){
       }
     } 
     $scope.todos.push(newObj); 
+    Todo.add(todo); 
+
   }
 
 
