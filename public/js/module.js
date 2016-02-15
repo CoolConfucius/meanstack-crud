@@ -20,22 +20,43 @@ app.service('Todo', function($http) {
     }); 
   }; 
 
+  this.getTodos = function(cb) {
+    return $http.get('/todos').then(res => {
+      this.data = res.data; 
+      console.log(this.data, "this data");
+      cb();
+    }); 
+  }
+
   this.add = function(todo) {
     return $http.post('/todos', todo)
   };
 });
 
-app.run(function(Todo){
+app.run(function(Todo, $rootScope){
+  console.log("run app");
   Todo.todos();
-})
+  $rootScope.todos = Todo.data; 
+});
 
 app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
-  console.log("homeCtrl ctrl");
-  console.log(Todo.todos(), "here?"); 
-  $rootScope.todos = Todo.data; 
-  $scope.todos = $rootScope.todos;
-  // $scope.todos = Todo.data;
-  console.log("Scope todos", $scope.todos);
+  $scope.getTodos = Todo.getTodos(function(){
+    console.log("homeCtrl ctrl");
+  // console.log(Todo.todos(), "here?"); 
+    $rootScope.todos = Todo.data; 
+    $scope.todos = $rootScope.todos;
+    // $scope.todos = Todo.data;
+    console.log("Scope todos", $scope.todos);
+    console.log("Scope todos", Todo.data);
+  });
+  // $scope.getTodos(); 
+
+  // console.log("homeCtrl ctrl");
+  // // console.log(Todo.todos(), "here?"); 
+  // $rootScope.todos = Todo.data; 
+  // $scope.todos = $rootScope.todos;
+  // // $scope.todos = Todo.data;
+  // console.log("Scope todos", $scope.todos);
   // console.log("Scope todos", Todo.data);
 
   $scope.sort = function(key){
@@ -60,8 +81,7 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     }  
     // $scope.todos.push(newObj); 
     Todo.add(newObj); 
-
-  }
+  };
 
 
 })
