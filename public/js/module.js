@@ -33,7 +33,7 @@ app.service('Todo', function($http) {
   };
 
   this.toggle = function(todo) {
-    return $http.put('/todos/todo')
+    return $http.put(`/todos/${todo}`)
   };
 
 });
@@ -88,10 +88,12 @@ app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
     Todo.add(newObj); 
   };
 
-  $scope.toggle = function(todo){
+  $scope.toggle = function(todo, index){
     console.log("todoid", todo);
     console.log("todoid", todo._id);
-    Todo.toggle(todo); 
+    console.log("index", index);
+    $scope.todos[index].iscomplete = !$scope.todos[index].iscomplete;
+    Todo.toggle(todo._id.toString()); 
   }
 
 

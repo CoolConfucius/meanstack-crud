@@ -39,7 +39,7 @@
           <td>{{$index}}</td>
           <td>{{item.description}}</td>
           <td>{{item.date}}</td>
-          <td ng-click="toggle(item)">{{item.iscomplete}}</td>
+          <td ng-click="toggle(item, $index)">{{item.iscomplete}}</td>
         </tr>
       </tbody>
     </table>
