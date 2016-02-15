@@ -16,17 +16,27 @@ app.service('Todo', function($http) {
   this.todos = function() {
     return $http.get('/todos').then(res => {
       this.data = res.data; 
+      console.log(this.data, "this data");
     }); 
   }; 
 
   this.add = function(todo) {
     return $http.post('/todos', todo)
   };
+});
+
+app.run(function(Todo){
+  Todo.todos();
 })
 
-app.controller('homeCtrl', function($scope, $state, Todo){
+app.controller('homeCtrl', function($rootScope, $scope, $state, Todo){
   console.log("homeCtrl ctrl");
-  $scope.todos = Todo.data;
+  console.log(Todo.todos(), "here?"); 
+  $rootScope.todos = Todo.data; 
+  $scope.todos = $rootScope.todos;
+  // $scope.todos = Todo.data;
+  console.log("Scope todos", $scope.todos);
+  // console.log("Scope todos", Todo.data);
 
   $scope.sort = function(key){
     console.log("sort!");

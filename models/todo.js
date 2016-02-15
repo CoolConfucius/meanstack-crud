@@ -10,8 +10,9 @@ var todoSchema = mongoose.Schema({
 });
 
 todoSchema.statics.add = function (todo, cb) {
+  console.log("carete todo", todo);
   Todo.create({
-    description: todo.desciption,
+    description: todo.description,
     date: Date.now(), 
     iscomplete: false
   }, cb);
