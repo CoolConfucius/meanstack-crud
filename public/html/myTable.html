@@ -1,0 +1,21 @@
+<label for="">Cheese:</label>
+<input type="text" ng-model="taco.cheese">
+<label for="">Meat:</label>
+<input type="text" ng-model="taco.meat">
+<label for="">Beans:</label>
+<input type="checkbox" ng-model="taco.beans">
+<button ng-click="addTaco(taco)">Add Taco</button>
+
+<table>
+  <thead>
+    <tr>
+      <td ng-repeat='(header, value) in list[0] track by $index'
+          ng-click='sort(header)'>{{header}}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat='item in list | orderBy:sorttext track by $index'>
+      <td ng-repeat='value in item '>{{value}}</td>
+    </tr>
+  </tbody>
+</table>
