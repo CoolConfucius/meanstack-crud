@@ -2,14 +2,14 @@
 
 var app = angular.module("someApp", ["ui.router"]); 
 
-app.config(function($stateProvider, $urlRouterProvider) {
+// app.config(function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider
-    .state('home', { url: '/', templateUrl: '/html/home.html', controller: 'homeCtrl' })
-    .state('todos', { url: '/', templateUrl: '/html/todos.html', controller: 'homeCtrl' })
+//   $stateProvider
+//     .state('home', { url: '/', templateUrl: '/html/home.html', controller: 'homeCtrl' })
+//     .state('todos', { url: '/', templateUrl: '/html/todos.html', controller: 'homeCtrl' })
 
-  $urlRouterProvider.otherwise('/'); 
-});
+//   $urlRouterProvider.otherwise('/'); 
+// });
 
 app.service('Todo', function($http) {
   
@@ -38,6 +38,7 @@ app.controller('homeCtrl', function($scope, $state, Todo){
   };
 
   $scope.addTodo = function(todo){
+    console.log("addTdod", todo);
     var newObj; 
     if (todo) {
       var description = todo.description ? todo.description : 'default description';
@@ -46,9 +47,9 @@ app.controller('homeCtrl', function($scope, $state, Todo){
         date: Date.now(), 
         iscomplete: false
       }
-    } 
-    $scope.todos.push(newObj); 
-    Todo.add(todo); 
+    }  
+    // $scope.todos.push(newObj); 
+    Todo.add(newObj); 
 
   }
 
